@@ -15,7 +15,9 @@ def writeIntoFile
   else
     puts "Your Data is not save and got lost"
   end
+end
 
+def readFile
   begin
     puts "Enter the file name to open"
     file_name = gets.chomp.to_s
@@ -28,3 +30,4 @@ def writeIntoFile
 end
 
 writeIntoFile
+readFile
