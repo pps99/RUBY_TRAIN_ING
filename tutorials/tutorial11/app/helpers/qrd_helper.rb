@@ -1,0 +1,2 @@
+module QrdHelper
+end
