@@ -1,6 +1,6 @@
 <h1>Upload the picture to folder</h1>
 
-<%= form_with url: folder_handler_path,  local: "true" do |form| %>
+<%= form_with url:create_folder_path,  local: "true" do |form| %>
     <div class="input">
       <%= form.text_field :attr, name: "folder_name", id: "folder_name", placeholder: "Folder Name" %>
     </div>
@@ -8,9 +8,14 @@
     <%= form.file_field :picture,:accept => 'jpeg/jpg/png' %>
     </div>
     <div class="button">
-      <%= form.submit :login %>
+      <%= form.submit :submit %>
     </div>
     <h2 class="err"><%= @error %></h2>
   <% end %>
 
 
+<% flash.each do |type, msg|%>
+ <div class="err">
+ <%= msg%>
+ <div>
+<%end%>
