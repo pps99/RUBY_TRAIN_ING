@@ -1,23 +1,14 @@
-class LoginController < ApplicationController
-  def handle_login
-    @login = false
-    email = "admin@gmail.com"
-    password = "admin"
-    if(params["email"] == email && params["password"] == password)
-      session[:email] = params["email"]
-      @login = true
-    elsif(params["email"] == "" || params["password"] == "")
-      @error = "Cannot be empty"
-      render :index
-    else(params["email"] != email || params["passwor"] != password )
-      @error = "email and passwrod missmatch"
-      render :index
-    end
-  end
+require "./config/initializers/constants.rb"
 
-  def handle_logout
-    session.delete(:email)
-    @login = false
-    redirect_to "/"
+class LoginController < ApplicationController
+  def validate_login
+    if EMAIL === params[:email] && PASSWORD === params[:password]
+      session[:email] = params[:email]
+      session[:password] = params[:password]
+      render "handle_login"
+    elsif (params[:email] == "" || params[:password] == "")
+      redirect_to root_path, alert: "Cannot be empty"
+    else (params[:email] != EMAIL || params[:password] != PASSWORD)
+      redirect_to root_path, alert: "Email & Password Missmatched"     end
   end
 end
