@@ -3,7 +3,9 @@ class QrdController < ApplicationController
 
   def create_qr
     @data = params[:input_data]
-
+    if(@data.length == 0 || @data.length > 10)
+      redirect_to root_path,alert: "Cannot create QR code"
+    else
     @qrcode = RQRCode::QRCode.new("#{@data}")
     @png = @qrcode.as_png(
       bit_depth: 1,
@@ -20,6 +22,7 @@ class QrdController < ApplicationController
     @file_location = "./app/assets/images/qrfile.png"
     File.binwrite(@file_location, @png.to_s)
     render "display"
+  end
   end
 
   def download
