@@ -7,3 +7,9 @@
       <%= form.submit :create %>
     </div>
 <% end %>
+
+<% flash.each do |type, msg|%>
+ <div class="err">
+ <%= msg%>
+ <div>
+<%end%>
