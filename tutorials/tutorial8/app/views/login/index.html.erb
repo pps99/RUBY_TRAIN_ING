@@ -1,6 +1,6 @@
 <div class="form">
   <h1>Login_Form</h1>
-  <%= form_with url: handle_login_path, local: "true" do |form| %>
+  <%= form_with url: handle_login_url, local: "true" do |form| %>
     <div class="input">
       <%= form.text_field :attr, name: "email", id: "email", placeholder: "Enter your email" %>
     </div>
@@ -10,6 +10,12 @@
     <div class="button">
       <%= form.submit :login %>
     </div>
-    <h2 class="err"><%= @error %></h2>
+
   <% end %>
 </div>
+
+<% flash.each do |type, msg| %>
+  <div class="err">
+   <%= msg %>
+   </div>
+<% end %>
