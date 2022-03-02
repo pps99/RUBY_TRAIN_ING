@@ -1,0 +1,23 @@
+<div class="form">
+  <h1>Login_Form</h1>
+  <%= form_with url: handle_login_url, local: "true" do |form| %>
+    <div class="input">
+      <%= form.text_field :attr, name: "email", placeholder: "Enter your email" %>
+    </div>
+    <div class="input">
+      <%= form.password_field :attr, name: "password", placeholder: "Enter your password" %>
+    </div>
+    <%=link_to "Create", new_user_path %>
+    <%= link_to "Forgot your password?", password_reset_path%>
+    <div class="button">
+      <%= form.submit :login %>
+    </div>
+
+  <% end %>
+</div>
+
+<% flash.each do |type, msg| %>
+  <div class="err">
+   <%= msg %>
+   </div>
+<% end %>
