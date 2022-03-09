@@ -1,0 +1,15 @@
+<h1>Input the data to create the QR code</h1>
+<%= form_with url: create_qr_path, local: "true" do |form| %>
+    <div class="input">
+      <%= form.text_field :attr, name: "input_data", id: "input_data", placeholder: "Input Data" %>
+    </div>
+    <div>
+      <%= form.submit :create %>
+    </div>
+<% end %>
+
+<% flash.each do |type, msg|%>
+ <div class="err">
+ <%= msg%>
+ <div>
+<%end%>
