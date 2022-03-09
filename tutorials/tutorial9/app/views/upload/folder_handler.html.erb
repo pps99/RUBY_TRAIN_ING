@@ -1,0 +1,4 @@
+<h1>Save Successfully.</h1>
+<button><%= link_to "Home_Page", root_path %></button>
+<% @image_path = session[:folder_name]+'/'+session[:file_name] %>
+<%= image_tag ("#{@image_path}") %>
