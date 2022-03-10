@@ -1,0 +1,32 @@
+<h1>Posts Data</h1>
+<div class="createbtn">
+<%=link_to "Create", new_post_path %>
+</div>
+<table>
+  <thead>
+    <th>title</th>
+    <th>description</th>
+    <th>status</th>
+    <th>options</th>
+  </thead>
+  <% @posts.each do |post| %>
+  <tr>
+    <td><%= post.title %></td>
+    <td><%= post.description %></td>
+    <td><%= post.status %></td>
+    <td>
+      <%= link_to "Edit", edit_post_path(post) %>
+      <%= link_to "Delete", post, method: :delete, data: { confirm: "Are you sure you want to delete this user?"} %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<h3>Import Posts</h3>
+<%= form_tag import_posts_path,multipart: true do %>
+ <%= file_field_tag :file%>
+ <%= submit_tag "Upload Posts" %>
+<% end %>
+
+<h3>Download File</h3>
+<%= link_to "Download", posts_path(format: "csv") %>
