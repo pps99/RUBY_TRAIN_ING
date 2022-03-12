@@ -1,0 +1,63 @@
+<h1>Users Data</h1>
+<div class="createbtn">
+<%=link_to "Create", new_user_path %>
+</div>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Address</th>
+    <th>Phone number</th>
+    <th>Operations</th>
+  </thead>
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.address %></td>
+    <td><%= user.phone_number%></td>
+    <td>
+      <%= link_to "Edit", edit_user_path(user) %>
+      <%= link_to "Delete", user, method: :delete, data: { confirm: "Are you sure you want to delete this user?"} %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<% @sql = "SELECT
+    DATE_FORMAT(`created_at`, '%m') as `date`,
+    COUNT(*) as `count`
+FROM `users`
+GROUP BY MONTH(`created_at`)"%>
+<% @records_array = ActiveRecord::Base.connection.execute(@sql).to_h%>
+
+
+
+<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+
+<script>
+var xValues = ["January", "February", "March", "April", "May","June","July","August","September","October","November","December"];
+var yValues = [<%= @records_array["01"]%>,<%= @records_array["02"]%>,<%= @records_array["03"]%>,<%= @records_array["04"]%>,
+               <%= @records_array["05"]%>,<%= @records_array["06"]%>,<%= @records_array["07"]%>,<%= @records_array["08"]%>,
+               <%= @records_array["9"]%>,<%= @records_array["10"]%>,<%= @records_array["11"]%>,<%= @records_array["012"]%>]
+var barColors = ["black","black","black","black","black","black","black","black","black","black","black","black"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data:  yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "The Total Number Of Users Created For Each Month"
+    }
+  }
+});
+</script>
+<%= @name %>
