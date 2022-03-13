@@ -1,0 +1,48 @@
+<h1>Posts Data</h1>
+<div class="createbtn">
+<%=link_to "Create", new_post_path %>
+</div>
+<table>
+  <thead>
+    <th>title</th>
+    <th>description</th>
+    <th>status</th>
+    <th>options</th>
+  </thead>
+  <tbody>
+   <%= render @posts %>
+  </tbody>
+</table>
+
+<%= form_with(model: @post, id: "new_post", local: false) do |f| %>
+<div>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+<div>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+</div>
+<div>
+  <%= f.label :status %>
+  <%= f.radio_button :status, "1" %><label for="status_1">private</label>
+  <%= f.radio_button :status, "0" %><label for="status_0">public</label>
+</div>
+
+
+<div>
+  <%= f.submit %>
+</div>
+<% end %>
+
+
+
+
+<h3>Import Posts</h3>
+<%= form_tag import_posts_path,multipart: true do %>
+ <%= file_field_tag :file%>
+ <%= submit_tag "Upload Posts" %>
+<% end %>
+
+<h3>Download File</h3>
+<%= link_to "Download", posts_path(format: "csv") %>
