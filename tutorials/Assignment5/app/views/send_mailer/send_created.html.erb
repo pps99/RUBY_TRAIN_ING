@@ -1,0 +1,16 @@
+<h1>Send#send_created</h1>
+
+  <table>
+  <thead>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Status</th>
+  </thead>
+  <% @greeting.each do |greet| %>
+  <tr>
+    <td><%= greet[0] %></td>
+    <td><%= greet[1] %></td>
+    <td><%= greet[2] %></td>
+  </tr>
+  <% end %>
+</table>
